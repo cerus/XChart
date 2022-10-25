@@ -30,6 +30,8 @@ import org.knowm.xchart.internal.chartpart.Chart;
  */
 public final class BitmapEncoder {
 
+    private static final int IMAGE_TYPE = BufferedImage.TYPE_INT_ARGB;
+
   /** Constructor - Private constructor to prevent instantiation */
   private BitmapEncoder() {}
 
@@ -155,7 +157,7 @@ public final class BitmapEncoder {
         new BufferedImage(
             (int) (chart.getWidth() * scaleFactor),
             (int) (chart.getHeight() * scaleFactor),
-            BufferedImage.TYPE_INT_RGB);
+            IMAGE_TYPE);
 
     Graphics2D graphics2D = bufferedImage.createGraphics();
 
@@ -276,7 +278,7 @@ public final class BitmapEncoder {
   public static <T extends Chart<?, ?>> BufferedImage getBufferedImage(T chart) {
 
     BufferedImage bufferedImage =
-        new BufferedImage(chart.getWidth(), chart.getHeight(), BufferedImage.TYPE_INT_RGB);
+        new BufferedImage(chart.getWidth(), chart.getHeight(), IMAGE_TYPE);
     Graphics2D graphics2D = bufferedImage.createGraphics();
     chart.paint(graphics2D, chart.getWidth(), chart.getHeight());
     return bufferedImage;
@@ -290,7 +292,7 @@ public final class BitmapEncoder {
     int totalWidth = singleImageWidth * cols;
     int totalHeight = singleImageHeight * rows;
     BufferedImage mergedImage =
-        new BufferedImage(totalWidth, totalHeight, BufferedImage.TYPE_INT_ARGB);
+        new BufferedImage(totalWidth, totalHeight, IMAGE_TYPE);
 
     Graphics g = mergedImage.getGraphics();
     for (int row = 0; row < rows; row++) {
